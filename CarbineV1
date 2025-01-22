@@ -23,6 +23,10 @@ local PlayerPage = Window:Page({
     Name = "Players"
 })
 
+local CheatsPage = Window:Page({
+    Name = "Cheats Main"
+})
+
 --[[
     Page:GetTotalYSize("string"),
 	Page:Update(),
@@ -30,7 +34,13 @@ local PlayerPage = Window:Page({
 ]]
 
 local PageSection1 = Page:Section({
-    Name = "Section", -- name, Name, title, Title
+    Name = "Main", -- name, Name, title, Title
+    Fill = true,
+    Side = "Left"
+})
+
+local CheatsSection1 = CheatsPage:Section({
+    Name = "UI Settings", -- name, Name, title, Title
     Fill = true,
     Side = "Left"
 })
@@ -40,8 +50,96 @@ local PageSection1 = Page:Section({
 ]]
 
 local PageMultiSection, pms1, pms2 = Page:MultiSection({
-    Sections = {"1", "2", "3"},
+    Sections = {"Rare Items", "Secret Items", "Card Items"},
     Side = "Right"
+})
+
+local Button1 PageMultiSection:Button({
+    Name = "Bread", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.Bread.Value += 1
+    end
+})
+local Button1 PageMultiSection:Button({
+    Name = "Red Candy", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.CandyRed.Value += 1
+    end
+})
+local Button1 PageMultiSection:Button({
+    Name = "Boxing Glove", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.BoxingGlove.Value += 1
+    end
+})
+local Button1 PageMultiSection:Button({
+    Name = "Cake", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.Cake.Value += 1
+    end
+})
+local Button1 PageMultiSection:Button({
+    Name = "Dragon Egg", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.DragonEgg.Value += 1
+    end
+})
+
+local Button1 pms1:Button({
+    Name = "Halloween Thruster", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.HalloweenThruster.Value += 1
+    end
+})
+local Button1 pms1:Button({
+    Name = "Lever", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.Lever.Value += 1
+    end
+})
+local Button1 pms1:Button({
+    Name = "Star", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.Star.Value += 1
+    end
+})
+local Button1 pms1:Button({
+    Name = "Yellow Chest", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.YellowChest.Value += 1
+    end
+})
+local Button1 pms1:Button({
+    Name = "Trophy Master", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.TrophyMaster.Value += 1
+    end
+})
+
+local Button1 pms1:Button({
+    Name = "JetPack Easter", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.JetPackEaster.Value += 1
+    end
+})
+local Button1 pms1:Button({
+    Name = "JetPack Star", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.JetPackStar.Value += 1
+    end
+})
+
+local Button1 pms2:Button({
+    Name = "JetPack Steampuck", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.JetPackSteampunk.Value += 1
+    end
+})
+local Button1 pms2:Button({
+    Name = "Laser Turret", -- name, Name, title, Title
+    callback = function(value)
+        game.Players.LocalPlayer.Data.LaserTurret.Value += 1
+    end
 })
 
 --[[
@@ -52,18 +150,28 @@ local PageMultiSection, pms1, pms2 = Page:MultiSection({
 	(callback, Callback, callBack, CallBack) = "function"
 ]]
 
-local Label = PageSection1:Label({
-    Name = "Label", -- name, Name, title, Title
-    Center = true
+local Slider1 = PageSection1:Slider({
+    Name = "WalkSpeed", -- name, Name, title, Title
+    Min = 5, -- def, Def, default, Default
+    Max = 200, -- min, Min, minimum, Minimum
+    Default = 16, -- max, Max, maximum, Maximum
+    --Suffix = "ms", -- suffix, Suffix, ending, Ending, prefix, Prefix, measurement, Measurement
+    --decimals = 0.01,
+    --Disabled = false, -- disable, Disable, disabled, Disabled
+    callback = function(value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+    end
 })
-
-local TextBox = PageSection1:TextBox({
-    Default = "TextBox", 
-    Placeholder =  "Type Here...", 
-    Max = 100,
-    Reactive = true,
-    Callback = function(value) 
-        print(value)
+local Slider2 = PageSection1:Slider({
+    Name = "JumpPower", -- name, Name, title, Title
+    Min = 50, -- def, Def, default, Default
+    Max = 2000, -- min, Min, minimum, Minimum
+    Default = 50, -- max, Max, maximum, Maximum
+    --Suffix = "ms", -- suffix, Suffix, ending, Ending, prefix, Prefix, measurement, Measurement
+    --decimals = 0.01,
+    --Disabled = false, -- disable, Disable, disabled, Disabled
+    callback = function(value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
     end
 })
 
@@ -73,10 +181,16 @@ local TextBox = PageSection1:TextBox({
 ]]
 
 local Toggle1 = PageSection1:Toggle({
-    Name = "Toggle", -- name, Name, title, Title
+    Name = "Infinite Jumps", -- name, Name, title, Title
     --Default = false,
     callback = function(value)
-        print(value)
+        local InfiniteJumpEnabled = value
+
+game:GetService("UserInputService").JumpRequest:Connect(function()
+    if InfiniteJumpEnabled then
+        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+    end
+end)
     end
 })
 
@@ -87,22 +201,6 @@ local Toggle1 = PageSection1:Toggle({
 	Toggle:Keybind("table"), -- (Window:Keybind Derivative)
 ]]
 
-local KeyBindToggle1 = PageSection1:Toggle({
-    Name = "KeyBindToggle", -- name, Name, title, Title
-    --Default = false,
-    callback = function(value)
-        print(value)
-    end
-}):Keybind({
-    Name = "KeybindToggle", -- name, Name, title, Title
-    Default = Enum.KeyCode.X, 
-    KeybindName = "KeybindToggle", 
-    Mode = "Toggle", 
-    Callback = function(Input, State) 
-        print(Input, State) 
-    end
-})
-
 --[[
     Keybind:Get(),
 	Keybind:Set("table"),
@@ -111,16 +209,6 @@ local KeyBindToggle1 = PageSection1:Toggle({
 	Keybind:Active(),
 	Keybind:Reset()
 ]]
-
-local Keybind1 = PageSection1:Keybind({
-    Name = "Keybind", -- name, Name, title, Title
-    Default = Enum.KeyCode.X, 
-    KeybindName = "Keybind", 
-    Mode = "Toggle", 
-    Callback = function(Input, State) 
-        print(Input, State) 
-    end
-})
 
 --[[
     Keybind:Get(),
@@ -133,55 +221,26 @@ local Keybind1 = PageSection1:Keybind({
 
 
 local Button1 = PageSection1:Button({
-    Name = "Button", -- name, Name, title, Title
+    Name = "Auto Farm [IF YOU WANT TO STOP REJOIN!]", -- name, Name, title, Title
     callback = function(value)
-        print(value)
+        pcall(function() loadstring(game:HttpGet('https://raw.githubusercontent.com/lilmond/BABFT_Autofarm/refs/heads/main/babft_autofarm_v1.lua'))() end)
     end
 })
-
-local Slider1 = PageSection1:Slider({
-    Name = "Slider", -- name, Name, title, Title
-    Min = 1, -- def, Def, default, Default
-    Max = 100, -- min, Min, minimum, Minimum
-    Default = 1, -- max, Max, maximum, Maximum
-    --Suffix = "ms", -- suffix, Suffix, ending, Ending, prefix, Prefix, measurement, Measurement
-    --decimals = 0.01,
-    --Disabled = false, -- disable, Disable, disabled, Disabled
-    callback = function(value)
-        print(value)
-    end
-})
-
---[[
-    Slider:Get(),
-	Slider:Set("number"),
-	Slider:Refresh()
-]]
-
-local MultiBox = PageSection1:Multibox({
-    Name = "MultiBox", 
-    Default = {"1", "2"}, 
-    Options = {"1", "2", "3", "4", "5", "6", "7", "8"}, 
-    Min = 2, 
-    Max = 5, 
-    callback = function(value) 
-        print(value) 
-    end
-})
-
---[[
-    Multibox:Get(),
-	Multibox:Set("string"),
-	Multibox:Update()
-]]
 
 local DropDown = PageSection1:Dropdown({
-    Name = "DropDown", -- name, Name, title, Title
+    Name = "Auto Farm Speed", -- name, Name, title, Title
     Default = "1",
     Max = "3",
     Options = {"1", "2", "3"},
     callback = function(value)
-        print(value)
+        print("Speed = " ..value)
+    end
+})
+
+local Button1 = CheatsSection1:Button({
+    Name = "Unload", -- name, Name, title, Title
+    callback = function(value)
+        Window:Unload()
     end
 })
 
@@ -191,34 +250,12 @@ local DropDown = PageSection1:Dropdown({
 	Dropdown:Update()
 ]]
 
-local ColorPicker1 = PageSection1:Colorpicker({
-    Name = "ColorPicker", -- name, Name, title, Title
-    Default = Color3.fromRGB(255, 0, 0),
-    Transparency = 0.25,
-    Info = "Color",
-    callback = function(value)
-        print(value)
-    end
-})
-
 --[[
     Colorpicker:Get(),
 	Colorpicker:Set("table"),
 	Colorpicker:Refresh(),
 	Colorpicker:Colorpicker() -- (Window:Colorpicker Derivative)
 ]]
-
-local Label = PageSection1:Label({
-    Name = "ListBox", -- name, Name, title, Title
-    Center = true
-})
-
-local List1 = PageSection1:List({
-    Name = "List", -- name, Name, title, Title
-    Default = 1,
-    Max = 5,
-    Options = {"1", "2", "3", "4", "5"}
-})
 
 --[[
     List:Get(),
