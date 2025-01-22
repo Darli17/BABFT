@@ -233,7 +233,7 @@ local DropDown = PageSection1:Dropdown({
     Max = "3",
     Options = {"1", "2", "3"},
     callback = function(value)
-        print("Speed = " ..value)
+        print("Speed: " ..value)
     end
 })
 
