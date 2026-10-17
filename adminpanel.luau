@@ -97,7 +97,8 @@ ultrajetpacks.TextLabel:Destroy()
 local goldamountclone = shopscrollingframe["Frame_006"].Balloons.TextLabel:Clone()
 goldamountclone.Parent = ultrajetpacks
 goldamountclone.Text = "80"
-ultrajetpacks.Quantity.Text = " "
+ultrajetpacks.Quantity.Text = "x1"
+ultrajetpacks.Quantity.Visible = false
 ultrajetpacks.TextLabel.TextColor3 = Color3.fromRGB(230, 196, 0)
 ultrajetpacks.Image = "http://www.roblox.com/asset/?id=4210890467"
 ultrajetpacks.Desc.Value = "just pinetree idk"
@@ -112,8 +113,14 @@ shopframe.SelectedFrame.BuyFrame.ToggleGiftButton.Visible = false
 end)
 
 sonicjets:Destroy()
-ultrathrusters:Destroy()
 hugewheels:Destroy()
+
+ultrathrusters.Name = "+3 Egg Cannons"
+ultrathrusters.Image = "http://www.roblox.com/asset/?id=6568169777"
+ultrathrusters.Quantity.Text = "Max x3"
+ultrathrusters.Desc.Value = "An egg cannon! Never buy this, you dont get you cannons product is bugged, to get this cannons you need to go easter boss fight 2021. Place Id to bossfight: 1930863474"
+ultrathrusters.TextLabel.Text = "Free"
+ultrathrusters.TextLabel.GoldImage.Visible = false
 
 local TweenService = game:GetService("TweenService")
 local tweenclose = TweenService:Create(admin, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {
