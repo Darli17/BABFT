@@ -16,6 +16,9 @@
 
                   love you all <3
 
+                  BY THEREALASU
+            THANKS FOR SCRIPT I LOVE YOU :D
+
 ]]
 
 if not game:IsLoaded() then
@@ -182,7 +185,7 @@ local function Shop()
     end
 
     --// loop
-    queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/LoopCandyFarm.lua'))()")
+    queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Darli17/BABFT/refs/heads/main/candyfarm.reupload.luau'))()")
 
     local success, err = pcall(function()
         TeleportService:TeleportToPlaceInstance(PlaceId, servers[math.random(1, #servers)], Players.LocalPlayer)
